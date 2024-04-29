@@ -41,5 +41,4 @@ python.exe IIHF_calendar_scraper.py
 ```
 
 ## License:
--------
   - GPL-3.0
