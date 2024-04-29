@@ -24,12 +24,13 @@ You can install these dependencies using pip, the Python package installer. Open
 
 ```bash
 pip install beautifulsoup4 pytz icalendar
+```
 
 Or
 
 ```bash
 pip install -r requirements.txt
-
+```
 
 ## How to Run
 
@@ -37,7 +38,7 @@ To run the script, open a terminal in the directory where the script is located 
 
 ```bash
 python.exe IIHF_calendar_scraper.py
-
+```
 
 ## License:
 -------
