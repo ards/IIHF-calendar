@@ -40,5 +40,5 @@ To run the script, open a terminal in the directory where the script is located 
 python.exe IIHF_calendar_scraper.py
 ```
 
-## License:
+## License
   - GPL-3.0
