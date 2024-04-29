@@ -9,8 +9,14 @@ from icalendar import Calendar, Event, Alarm
 # All other games will have reminders 1 hour and 15 minutes before the game.
 # List of country codes: https://en.wikipedia.org/wiki/List_of_IOC_country_codes
 favoriteTeam = 'LAT'
+
 # Set the year of the IIHF World Championship, should also work for years in past.
 year = '2024'
+
+# Timezone settings
+# Set your preferred timezone here
+# List of timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+localTimezone = pytz.timezone('Europe/Riga')
 
 # Fetch and parse the schedule page
 url = f"https://www.iihf.com/en/events/{year}/wm/schedule"
@@ -23,13 +29,9 @@ cal = Calendar()
 cal.add('prodid', '-//IIHF 2024 Games Calendar//mxm.dk//')
 cal.add('version', '2.0')
 
-# Timezone settings
-# Set your preferred timezone here
-# List of timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-localTimezone = pytz.timezone('Europe/Riga')
-
 # Extract game details
 game_cards = soup.find_all('div', class_='b-card-schedule')
+print(f"Found {len(game_cards)} games.")
 
 for game in game_cards:
     team_a = game['data-hometeam']
@@ -47,7 +49,7 @@ for game in game_cards:
     event = Event()
 
     if favoriteTeam in [team_a, team_b]:
-        event.add('summary', f"🌟Hockey: {team_a} vs {team_b}🌟")    
+        event.add('summary', f"🌟Hockey: {team_a} vs {team_b}🌟")
     else:
         event.add('summary', f"Hockey: {team_a} vs {team_b}")
 
