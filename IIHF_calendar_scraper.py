@@ -36,27 +36,26 @@ for game in game_cards:
     team_b = game['data-guestteam']
     game_date_utc = game['data-date-utc']
     game_time_utc = game['data-time-utc']
-    
+
     datetime_utc = datetime.fromisoformat(f"{game_date_utc} {game_time_utc}")
     utc = pytz.timezone('UTC')
     datetime_utc = utc.localize(datetime_utc)
-    
+
     local_datetime = datetime_utc.astimezone(localTimezone)
 
     # Create the calendar event
     event = Event()
-    
+
     if favoriteTeam in [team_a, team_b]:
         event.add('summary', f"🌟Hockey: {team_a} vs {team_b}🌟")    
     else:
         event.add('summary', f"Hockey: {team_a} vs {team_b}")
-    
+
     event.add('dtstart', local_datetime)
     event.add('dtend', local_datetime + timedelta(hours=2))  # Assuming each game lasts about 2 hours
     event.add('dtstamp', datetime.now())
     event['uid'] = game['data-game-id']
-    
-    
+
     # Set reminders for favorite games
     if favoriteTeam in [team_a, team_b]:
         # Reminder 1 day before
@@ -65,13 +64,13 @@ for game in game_cards:
         alarm1.add("action", "DISPLAY")
         alarm1.add('description', "Reminder: Game starts in 24 hours")
         event.add_component(alarm1)
-        
+
     alarm2 = Alarm()
     alarm2.add("trigger", timedelta(hours=-1))
     alarm2.add("action", "DISPLAY")
     alarm2.add('description', "Reminder: Game starts in 1 hour")
     event.add_component(alarm2)    
-    
+
     alarm3 = Alarm()
     alarm3.add("trigger", timedelta(minutes=-15))
     alarm3.add("action", "DISPLAY")
@@ -79,13 +78,13 @@ for game in game_cards:
     event.add_component(alarm3)   
 
     cal.add_component(event)
-    
+
 # Save the calendar to a file
 if favoriteTeam:
     filename = f"IIHF_2024_Games_Calendar_{favoriteTeam}.ics"
 else:
     filename = f"IIHF_2024_Games_Calendar.ics"
-    
+
 with open(filename, 'wb') as f:
     f.write(cal.to_ical())
 
