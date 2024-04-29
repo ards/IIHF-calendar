@@ -9,10 +9,12 @@ from icalendar import Calendar, Event, Alarm
 # All other games will have reminders 1 hour and 15 minutes before the game.
 # List of country codes: https://en.wikipedia.org/wiki/List_of_IOC_country_codes
 favoriteTeam = 'LAT'
+# Set the year of the IIHF World Championship, should also work for years in past.
 year = '2024'
 
 # Fetch and parse the schedule page
 url = f"https://www.iihf.com/en/events/{year}/wm/schedule"
+print(f"Fetching data from {url}...")
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -22,8 +24,9 @@ cal.add('prodid', '-//IIHF 2024 Games Calendar//mxm.dk//')
 cal.add('version', '2.0')
 
 # Timezone settings
+# Set your preferred timezone here
+# List of timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 localTimezone = pytz.timezone('Europe/Riga')
-
 
 # Extract game details
 game_cards = soup.find_all('div', class_='b-card-schedule')
@@ -54,7 +57,7 @@ for game in game_cards:
     event['uid'] = game['data-game-id']
     
     
-    # Set reminders for Latvia games
+    # Set reminders for favorite games
     if favoriteTeam in [team_a, team_b]:
         # Reminder 1 day before
         alarm1 = Alarm()
@@ -78,7 +81,11 @@ for game in game_cards:
     cal.add_component(event)
     
 # Save the calendar to a file
-filename = f"IIHF_2024_Games_Calendar_{favoriteTeam}.ics"
+if favoriteTeam:
+    filename = f"IIHF_2024_Games_Calendar_{favoriteTeam}.ics"
+else:
+    filename = f"IIHF_2024_Games_Calendar.ics"
+    
 with open(filename, 'wb') as f:
     f.write(cal.to_ical())
 
