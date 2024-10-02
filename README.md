@@ -23,12 +23,6 @@ This script requires the following Python libraries:
 You can install these dependencies using pip, the Python package installer. Open a terminal and type:
 
 ```bash
-pip install beautifulsoup4 pytz icalendar
-```
-
-Or
-
-```bash
 pip install -r requirements.txt
 ```
 
