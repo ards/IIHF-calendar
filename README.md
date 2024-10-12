@@ -16,9 +16,10 @@ You can customize the script to suit your needs:
 
 This script requires the following Python libraries:
 
-- BeautifulSoup
+- beautifulsoup4
 - pytz
 - icalendar
+- requests
 
 You can install these dependencies using pip, the Python package installer. Open a terminal and type:
 
