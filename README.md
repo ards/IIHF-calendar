@@ -8,7 +8,8 @@ The script uses the BeautifulSoup library to parse the HTML of the IIHF website 
 
 You can customize the script to suit your needs:
 
-- **Year**: The script is currently set to scrape the 2024 games. You can change the year by modifying the URL in the script.
+- **Year**: Specify year as parameter when executing script, if parameter is not provided will use current year.
+- **Event Types**: The script supports multiple event types: wm (World Men), ww (Women's Worlds), wm20 (World Men U20), wm18 (World Men U18), and ww18 (World Women's U18). By default, it processes all event types. You can specify a single event type by passing it as a command-line argument.
 - **Output Time Zone**: The script converts the game times to the 'Europe/Riga' timezone. You can change this to your preferred timezone by modifying the `localTimezone` variable.
 - **Favorite Team**: You can set your favorite team by modifying the `favoriteTeam` variable. The script will then set a reminder 24 hours before each game that involves your favorite team, allowing you to plan in advance.
 
