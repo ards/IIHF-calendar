@@ -17,6 +17,7 @@ You can customize the script to suit your needs:
 This script requires the following Python libraries:
 
 - beautifulsoup4
+- requests
 - pytz
 - icalendar
 - requests
@@ -33,6 +34,20 @@ To run the script, open a terminal in the directory where the script is located 
 
 ```bash
 python.exe IIHF_calendar_scraper.py
+```
+
+This will generate calendars for all event types for the current year.
+
+To specify a different year:
+
+```bash
+python IIHF_calendar_scraper.py 2025
+```
+
+To specify a different year and event type:
+
+```bash
+python IIHF_calendar_scraper.py 2025 wm
 ```
 
 ## License
